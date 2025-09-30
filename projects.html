@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sadie Racky | Projects</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Only run the touch helper on devices that support touch
+  if (!('ontouchstart' in window)) return;
+
+  const selectors = '.projects-container .project-box, .skill-box, .interest-box, .gallery figure, #schematics figure';
+  const elems = Array.from(document.querySelectorAll(selectors));
+
+  // Make these elements focusable by keyboard if they aren't already (accessibility)
+  elems.forEach(el => {
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+  });
+
+  // Toggle is-hover on first touch, remove after short delay or when tapping elsewhere
+  elems.forEach(el => {
+    el.addEventListener('touchstart', function (ev) {
+      // if this element already has is-hover, let the user activate links inside it normally
+      if (!this.classList.contains('is-hover')) {
+        // remove other is-hover
+        document.querySelectorAll('.is-hover').forEach(x => x.classList.remove('is-hover'));
+        this.classList.add('is-hover');
+
+        // prevent immediate click-through ghost (small delay) — allow user to tap again to activate
+        // but don't block default behavior for links inside
+        ev.stopPropagation();
+      }
+      // keep touchstart from triggering page scroll jump behavior
+    }, { passive: true });
+
+    // remove class shortly after touchend so it doesn't stick forever
+    el.addEventListener('touchend', function () {
+      setTimeout(() => {
+        this.classList.remove('is-hover');
+      }, 1800); // visible for ~1.8s
+    }, { passive: true });
+  });
+
+  // If the user taps outside any of those elements, clear all is-hover states
+  document.addEventListener('touchstart', function (ev) {
+    if (!ev.target.closest(selectors)) {
+      document.querySelectorAll('.is-hover').forEach(x => x.classList.remove('is-hover'));
+    }
+  }, { passive: true });
+});
+</script>
+<script>
+  const clickMe = document.querySelector('.click-me-text');
+  const circleBox = document.querySelector('.text-box.top-text');
+
+  clickMe.addEventListener('click', () => {
+    circleBox.classList.toggle('active');
+  });
+</script>
+
+<body>
+  <header>
+    <h1>Sadie Racky</h1>
+   
+    
+  </header>
+  <div class="full-width-inlay">
+  <img src="img/binary.gif" alt="Inlay Image Description">
+</div>
+
+  <nav>
+    <a href="index.html">About</a>
+    <a href="projects.html">Projects & Photos</a>
+    <a href="schematics.html">Circuit Models</a>
+  </nav>
+
+<main id="projects">
+
+  <!-- Computer Section -->
+  <div class="computer-container">
+    <img src="img/comp.png" alt="Computer" class="computer-image">
+    <div class="click-me-text">Click Me</div>
+    <div class="text-circle">
+      <p>These projects range from hardware sound circuitry, object-oriented programming, audio programming/live coding, and website hardcoding...</p>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="projects-container">
+
+    <!-- LM386 Amplifier -->
+    <div class="project-box">
+      <div class="project-image">
+        <img src="img/lm.png" alt="LM386 Amplifier">
+      </div>
+      <div class="project-info">
+        <h3>LM386 Amplifier</h3>
+        <p>The LM386 is a versatile and easy-to-use Class-AB audio power amplifier IC designed for low-voltage, battery-powered consumer applications like radio and portable stereo systems. It features an internally set voltage gain of 20, which can be increased to 200 with an external capacitor and resistor, requires minimal external components, and has a wide operating voltage range from 4V to 18V.</p>
+      </div>
+    </div>
+
+    <!-- 40106 Phase Shift Oscillator -->
+      <div class="project-box">
+      <div class="project-image">
+        <img src="img/40106.png" alt="40106 Phase Shift Oscillator">
+      </div>
+      <div class="project-info">
+        <h3>40106 Phase Shift Oscillator</h3>
+        <p>A phase-shift oscillator is a linear electronic oscillator circuit that produces a sine wave output. It consists of an inverting amplifier element such as a transistor or op amp with its output fed back to its input through a phase-shift network consisting of resistors and capacitors in a ladder network. The feedback network 'shifts' the phase of the amplifier output by 180 degrees at the oscillation frequency to give positive feedback.</p>
+      </div>
+    </div>
+
+    <!-- Triple Vibrati Atari Punk Console -->
+    <div class="project-box">
+      <div class="project-image">
+        <img src="img/atari.png" alt="Triple Vibrati Atari Punk Console">
+      </div>
+      <div class="project-info">
+        <h3>Triple Vibrati Atari Punk Console</h3>
+        <p>The Triple Vibrati Punk Console is a DIY electronic instrument combining a low-frequency oscillator and an Atari Punk Console-style sound generator to create rich, dynamic sound effects. Using 555 and 556 timer chips, it produces modulated square-wave tones, with three knobs for adjusting pitch and tone, as well as one separate volume knob. The LFO feeds into the sound generator, altering its base frequency for pulsating and warble sound effects.</p>
+      </div>
+    </div>
+
+    <!-- Twin-T Oscillator -->
+   <div class="project-box">
+      <div class="project-image">
+        <img src="img/twint.png" alt="Twin-T Oscillator">
+      </div>
+      <div class="project-info">
+        <h3>Twin-T Oscillator</h3>
+        <p>A twin-T oscillator is an RC oscillator that produces a low-distortion sinusoidal output by using an active op-amp to provide positive feedback through a twin-T notch filter. The twin-T filter, a combination of parallel low-pass and high-pass RC networks, creates a null at a specific notch frequency. When placed in the feedback path of an amplifier, this network causes the circuit to oscillate at the notch frequency.</p>
+      </div>
+    </div>
+
+    <!-- Handmade Kalimba -->
+      <div class="project-box">
+      <div class="project-image">
+        <img src="img/kalim.png" alt="Handmade Kalimba">
+      </div>
+      <div class="project-info">
+        <h3>Handmade Kalimba</h3>
+        <p>This is a handcrafted kalimba built using metal prongs mounted on a repurposed cigar box. Each prong’s length was carefully measured to produce a specific pitch, allowing the creation of a complete musical scale across the instrument. By fine-tuning the length of each tine, the kalimba achieves bright, resonant tones when plucked. The cigar box serves as a natural acoustic resonator, amplifying the vibrations and giving the instrument a warm, organic sound. This project combines hands-on craftsmanship, acoustic principles, and musical experimentation to produce a fully playable, custom-tuned instrument.</p>
+      </div>
+    </div>
+
+    <!-- Website Development Club -->
+     <div class="project-box">
+      <div class="project-image">
+        <img src="img/webdev.jpg" alt="Website Development Club">
+      </div>
+      <div class="project-info">
+        <h3>Website: Website Development Club</h3>
+        <p>I created a fully hand-coded website for my college’s Website Development Club using HTML, CSS, and JavaScript. The site features a clean, responsive layout that works smoothly on both desktop and mobile screens, presenting the club’s mission, events, and member projects in an organized way. I used semantic HTML for clear structure, CSS for a cohesive visual design, and JavaScript to add interactive elements like dynamic event updates, form validation, and subtle animations.</p>
+      </div>
+    </div>
+
+    <!-- SuperCollider Synth -->
+     <div class="project-box">
+      <div class="project-image">
+        <img src="img/supercollider.jpg" alt="SuperCollider Synth">
+      </div>
+      <div class="project-info">
+        <h3>SuperCollider Synth</h3>
+        <p>I developed a SuperCollider live coding synth featuring 10 fully hand-coded synthesizers, designed to perform an entire live coding composition from scratch. Each synth was carefully programmed to produce unique textures, tones, and rhythms, allowing for intricate layering and dynamic interplay during performance. This setup demonstrates both sound design expertise and live coding proficiency.</p>
+      </div>
+    </div>
+
+    <!-- MaxMSP Project -->
+   <div class="project-box">
+          <div class="project-image">
+        <img src="img/MAXMSP.jpg" alt="MaxMSP Project">
+      </div>
+      <div class="project-info">
+        <h3>MaxMSP Project</h3>
+        <p>I created a voice-controlled drum kit using node-based coding in Max/MSP, allowing my voice to trigger and manipulate percussion sounds in real time. Different vocal pitches and amplitudes control individual drum elements, creating complex rhythmic patterns entirely through vocal input.</p>
+      </div>
+    </div>
+
+    <!-- C# Text Based Game -->
+   <div class="project-box">
+          <div class="project-image">
+        <img src="img/csgame.jpg" alt="C# Text Based Game">
+      </div>
+      <div class="project-info">
+        <h3>C# Text Based Game</h3>
+        <p>I developed a text-based game entirely from scratch using object-oriented programming in C#, implementing classes, objects, and methods to manage game logic, character stats, and interactions. The game features dynamic decision-making, inventory management, and randomized events, creating an engaging player experience purely through text.</p>
+      </div>
+    </div>
+
+    </main>
+
+    <!-- Full Source Code Box -->
+    <div class="project-box">
+      <div class="project-info full-width-text">
+        <p>
+          Full source code for programming and website project files are available on my 
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+          and also in this 
+          <a href="https://drive.google.com/drive/folders/1v1NrsXrjfkWDY9IT5vFcNDm_LzSL2fGZ?usp=drive_link" target="_blank" rel="noopener noreferrer">Google Drive folder</a>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+    <!-- Photo Album -->
+    <h2 class="floating-header">Photo Album</h2>
+
+    <div class="album-container">
+      <div class="slide"><img src="img/image1.jpg" alt="Snow Tops"></div>
+      <div class="slide"><img src="img/image2.jpg" alt="Lights"></div>
+      <div class="slide"><img src="img/image3.jpeg" alt="Mountains"></div>
+      <div class="slide"><img src="img/image4.jpeg" alt="Forest"></div>
+      <div class="slide"><img src="img/image5.jpeg" alt="Mountains"></div>
+      <div class="slide"><img src="img/image6.jpeg" alt="Forest"></div>
+      <div class="slide"><img src="img/image7.jpeg" alt="Mountains"></div>
+      <div class="slide"><img src="img/image8.jpeg" alt="Forest"></div>
+      <!-- Navigation Arrows -->
+      <button class="prev" onclick="plusDivs(-1)">&#10094;</button>
+      <button class="next" onclick="plusDivs(1)">&#10095;</button>
+    </div>
+
+    <!-- Dots -->
+    <div class="dots-container">
+      <span class="dot" onclick="currentDiv(1)"></span>
+      <span class="dot" onclick="currentDiv(2)"></span>
+      <span class="dot" onclick="currentDiv(3)"></span>
+      <span class="dot" onclick="currentDiv(4)"></span>
+    </div>
+
+  </main>
+
+  <script src="scripts.js"></script>
+  <script>
+    // Simple slideshow
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) { showDivs(slideIndex += n); }
+    function currentDiv(n) { showDivs(slideIndex = n); }
+
+    function showDivs(n) {
+      const slides = document.getElementsByClassName("slide");
+      const dots = document.getElementsByClassName("dot");
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+      for (let i = 0; i < dots.length; i++) dots[i].className = dots[i].className.replace(" active", "");
+      slides[slideIndex-1].style.display = "flex";
+      if (dots[slideIndex-1]) dots[slideIndex-1].className += " active";
+    }
+  </script>
+      <div class="contact-box">
+        <h3>Contact Me</h3>
+        <p>Email: <a href="mailto:Sadie.Racky@gmail.com">Sadie.Racky@gmail.com</a></p>
+        <p>Phone: <a href="tel:6308180143">630-818-0143</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/sadie-racky" target="_blank" rel="noopener">linkedin.com/in/sadie-racky</a></p>
+        <p>GitHub: <a href="http://github.com/Sadieracky1" target="_blank" rel="noopener">github.com/Sadieracky1</a></p>
+      </div>
+  <footer class="site-footer">
+  <p>Site designed by Sadie Racky&nbsp;|&nbsp;
+    <a href="mailto:Sadie.racky@gmail.com">Sadie.racky@gmail.com</a>
+  </p>
+
+
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickMe = document.querySelector('.click-me-text');
+    const circleBox = document.querySelector('.text-circle');
+
+    clickMe.addEventListener('click', function() {
+      circleBox.classList.toggle('active');
+    });
+  });
+</script>
+
+</body>
+</html>
